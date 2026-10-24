@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://s3.tradingview.com; style-src 'self'; style-src-elem 'self' 'unsafe-inline'; style-src-attr 'none'; frame-src https://*.tradingview.com https://*.tradingview-widget.com; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
+<title>Master Desk</title>
+<meta name="description" content="The day’s best setups: one clear plan per stock, where to buy, where it is wrong, where to take profit, the evidence behind it in plain English, and every call scored.">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#0E1116" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F6F7F9" media="(prefers-color-scheme: light)">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="app.7a5b5583e3.css">
+<script src="app.916fb68928.js" defer></script>
+</head>
+<body>
+<header class="mast" id="mast">
+  <div class="wrap mi">
+    <div class="brand">
+      <h1 class="mark">Master Desk</h1>
+      <p class="sub">The day’s best setups, read from everything the desk measures</p>
+    </div>
+    <div class="stat">
+      <span class="dot" id="dot" aria-hidden="true"></span>
+      <span class="stx">
+        <span class="st1"><span class="sr" id="dotl"></span><span class="ew" id="ew" hidden>Edition </span><span id="st1">Loading…</span></span>
+        <span class="st2" id="st2"></span>
+      </span>
+    </div>
+    <button class="pz" id="pause" type="button">
+      <svg class="i-pause" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><rect x="3.5" y="2.5" width="3" height="11" rx="1"/><rect x="9.5" y="2.5" width="3" height="11" rx="1"/></svg>
+      <svg class="i-play" width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M4.5 2.8v10.4a.8.8 0 0 0 1.2.7l8.3-5.2a.8.8 0 0 0 0-1.4L5.7 2.1a.8.8 0 0 0-1.2.7z"/></svg>
+      <span class="pl">Pause</span><span class="sr"> auto-refresh</span>
+    </button>
+  </div>
+</header>
+<div class="pill" id="pill" hidden><button type="button" id="pillb">New ↑</button></div>
+<main class="wrap" id="main">
+  <p class="sess" id="sess"></p>
+  <p class="fb" id="fearb" hidden></p>
+  <ul class="notes" id="notes" hidden></ul>
+  <div class="grid">
+    <div class="m1">
+      <section id="board" aria-labelledby="h-board" data-anchor>
+        <div class="hd"><h2 id="h-board">Best setups</h2><span class="hm" id="board-meta"></span></div>
+        <div class="cards" id="cards"></div>
+        <div class="card empty" id="empty" data-anchor hidden>
+          <p class="eh">The board fills with the next edition.</p>
+          <p class="mu" id="next"></p>
+        </div>
+        <p class="card mu" id="load">Loading the latest edition…</p>
+      </section>
+      <section id="watch" aria-labelledby="h-watch" data-anchor hidden>
+        <div class="hd"><h2 id="h-watch">Watching</h2><span class="hm">Strong charts nearing their trigger</span></div>
+        <div class="card"><ul class="wl" id="wl"></ul></div>
+      </section>
+      <section id="look" aria-labelledby="h-look" data-anchor hidden>
+        <div class="hd"><h2 id="h-look">Look up</h2><span class="hm" id="look-meta"></span></div>
+        <div class="card">
+          <form id="lf" class="lf" role="search"><label class="sr" for="lq">Stock symbol</label><input id="lq" class="lq" type="text" inputmode="search" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Symbol, e.g. AAPL" maxlength="12"><button class="btn" type="submit">Read</button></form>
+          <ul class="ls" id="ls"></ul>
+          <div id="lres"></div>
+        </div>
+      </section>
+      <section id="left" aria-labelledby="h-left" data-anchor hidden>
+        <div class="hd"><h2 id="h-left">Left the board</h2></div>
+        <div class="card">
+          <ul class="dep" id="dep"></ul>
+          <button class="more" id="depmore" type="button" aria-expanded="false" aria-controls="dep" hidden></button>
+        </div>
+      </section>
+    </div>
+    <div class="aside">
+      <section class="market" id="market" aria-labelledby="h-mkt" data-anchor hidden>
+        <div class="hd"><h2 id="h-mkt">Market read</h2><span class="hm" id="asof"></span></div>
+        <div class="card">
+          <p class="sent" id="sent"></p>
+          <details class="mkm"><summary><span class="mo">More</span><span class="ml">Less</span></summary></details>
+          <div class="chips" id="chips"></div>
+          <p class="cal" id="cal" hidden></p>
+        </div>
+      </section>
+      <section id="sectors" aria-labelledby="h-sec" data-anchor hidden>
+        <div class="hd"><h2 id="h-sec">Sector strength</h2><span class="hm" id="sec-meta"></span></div>
+        <div class="card">
+          <ol class="sec" id="secl"></ol>
+          <p class="axis" aria-hidden="true"><span></span><span class="ax"><span>← Lagging</span><span>Leading →</span></span><span></span></p>
+        </div>
+      </section>
+    </div>
+    <section id="record" aria-labelledby="h-rec" data-anchor>
+      <div class="hd"><h2 id="h-rec">Track record</h2><span class="hm" id="rec-meta"></span></div>
+      <div class="card">
+        <div id="rec"><p class="note">Every listed setup becomes a call, written down before the outcome and scored here.</p></div>
+      </div>
+    </section>
+    <section id="how" aria-labelledby="h-how" data-anchor>
+      <div class="hd"><h2 id="h-how">How it works</h2></div>
+      <div class="card how">
+        <ol class="steps">
+          <li><b>Read everything.</b> After each close the desk reads every stock on its list the same way: the trend and its averages, the levels where buyers and sellers stepped in before, momentum and its divergences, volume, volatility, candles and gaps, chart patterns, Wyckoff events and the Elliott wave count, the fund each stock follows, the market, and its own strategies.</li>
+          <li><b>One plan.</b> From those levels it builds one plan: where to buy, the daily close that proves it wrong, where to take profit, and by when. A stock that is falling gets a plan that buys only once it turns.</li>
+          <li><b>Conviction and the desk’s take.</b> Each kind of evidence (the trend, the levels, momentum, volume, the wave count and so on) casts one vote, however many readings it has. Conviction counts how many kinds agree, net: High at three, Solid at two. The desk’s take adds what the evidence does not hold: support stacked at the buy, the fund it follows, earnings inside the hold.</li>
+          <li><b>The board.</b> The strongest five are listed. A setup keeps its place while its call is live and it still ranks among the top ten; one that leaves says why, and its call is still scored to the end.</li>
+          <li><b>The record.</b> Every listed setup is written down before the outcome and scored on daily closes, losers included.</li>
+        </ol>
+        <details class="gls"><summary><h3>The wave method, in seven drawings</h3></summary>
+          <div class="wv">
+            <figure><svg viewBox="0 0 240 130" role="img" aria-label="Five waves up, with the start and the wave 1 high as the lines waves 2 and 4 must hold">
+              <line class="k" x1="4" y1="112" x2="236" y2="112"/><line class="g" x1="40" y1="72" x2="236" y2="72"/>
+              <polyline class="p" points="10,112 50,72 75,94 140,30 165,52 215,14"/>
+              <text x="47" y="64">1</text><text x="72" y="108">2</text><text x="137" y="22">3</text><text x="167" y="66">4</text><text x="212" y="10">5</text>
+              <text class="kt" x="122" y="124">start: 2 stays above</text><text x="104" y="86">1’s high: 4 stays above</text></svg>
+              <figcaption><b>Five waves up</b>Three rules hold every count: wave 2 never falls under the start, wave 3 is never the shortest, wave 4 never drops under wave 1’s high.<i>Break a rule: count again.</i></figcaption></figure>
+            <figure><svg viewBox="0 0 240 130" role="img" aria-label="Wave 2 pulls back in three waves into the 0.618 to 0.786 zone; the buy is a daily close up inside it">
+              <rect class="z" x="80" y="76" width="156" height="15"/><line class="k" x1="4" y1="112" x2="236" y2="112"/>
+              <polyline class="p" points="10,112 25,86 33,96 55,46 63,58 80,20 100,60 112,46 135,82"/>
+              <line class="c" x1="146" y1="70" x2="146" y2="88"/><rect class="cb" x="142" y="74" width="8" height="10"/>
+              <polyline class="f" points="150,74 232,8"/>
+              <text x="200" y="73">0.618</text><text x="200" y="102">0.786</text><text class="kt" x="58" y="124">start of wave 1: where it is wrong</text></svg>
+              <figcaption><b>Wave 2’s buy zone</b>After five waves up, the pullback usually ends between the 0.618 and 0.786 retracement, in three waves, on lighter volume. The buy is the first daily close up inside the zone.<i>Watch the zone. Act on the close.</i></figcaption></figure>
+            <figure><svg viewBox="0 0 240 130" role="img" aria-label="A shallow, quick, one-leg drop on rising selling volume has further to go">
+              <rect class="z" x="80" y="76" width="156" height="15"/>
+              <polyline class="p" points="10,112 25,86 33,96 55,46 63,58 80,20 96,54"/>
+              <polyline class="f" points="96,54 120,84"/><line class="g" x1="80" y1="54" x2="236" y2="54"/>
+              <rect class="vb" x="84" y="116" width="5" height="8"/><rect class="vb" x="91" y="112" width="5" height="12"/><rect class="vb" x="98" y="107" width="5" height="17"/>
+              <text x="200" y="50">0.382</text><text x="128" y="72">further to go</text><text x="110" y="122">selling rises</text></svg>
+              <figcaption><b>Not done yet</b>Too shallow, one straight leg, too quick for the advance before it, or heavier selling: a pullback like that has further to go.<i>Fast and shallow is not finished.</i></figcaption></figure>
+            <figure><svg viewBox="0 0 240 130" role="img" aria-label="A star: a smaller wave 1 and 2 inside a larger wave 3; the end of the small wave 2 starts wave 3 of 3">
+              <line class="k" x1="4" y1="96" x2="236" y2="96"/>
+              <polyline class="p" points="10,118 60,56 86,96 116,64 132,80"/><circle class="ce" cx="132" cy="80" r="5"/>
+              <polyline class="f" points="132,80 230,6"/>
+              <text x="56" y="48">1</text><text x="70" y="110">2</text><text x="108" y="56">(1)</text><text x="141" y="90">(2)</text><text x="112" y="28">wave 3 of 3</text>
+              <text class="kt" x="88" y="122">start of (1): where it is wrong</text></svg>
+              <figcaption><b>A*: wave 3 of 3</b>A smaller wave 1 and 2 inside a larger wave 3. The end of the small wave 2 starts the strongest leg a chart makes.<i>Two waves 2 in a row: the third leg is the big one.</i></figcaption></figure>
+            <figure><svg viewBox="0 0 240 130" role="img" aria-label="The fifth wave makes a new high on weaker momentum than the third">
+              <polyline class="p" points="10,84 50,56 75,72 140,22 165,38 215,12"/><line class="g" x1="140" y1="22" x2="215" y2="12"/>
+              <polyline class="m" points="10,124 50,110 75,118 140,96 165,114 215,106"/><line class="kl" x1="140" y1="96" x2="215" y2="106"/>
+              <text x="137" y="16">3</text><text x="212" y="8">5</text><text x="12" y="104">momentum</text></svg>
+              <figcaption><b>The end of wave 5</b>A fifth wave that makes a new high on weaker momentum than the third often ends the advance. The next buy is the pullback after it.<i>A high that pushes less is a warning.</i></figcaption></figure>
+            <figure><svg viewBox="0 0 240 130" role="img" aria-label="Wave 4 pulls back into the 0.382 to 0.5 retracement of wave 3, above the top of wave 1">
+              <rect class="z" x="150" y="50" width="86" height="9"/><line class="k" x1="4" y1="80" x2="236" y2="80"/>
+              <polyline class="p" points="10,112 50,80 68,98 150,20 165,40 173,33 190,55"/>
+              <line class="c" x1="198" y1="46" x2="198" y2="60"/><rect class="cb" x="194" y="49" width="8" height="8"/>
+              <polyline class="f" points="202,49 234,8"/>
+              <text x="46" y="72">1</text><text x="64" y="112">2</text><text x="146" y="14">3</text><text x="176" y="68">4</text>
+              <text x="190" y="72">0.382–0.5</text><text class="kt" x="90" y="94">wave 1’s high: never overlapped</text></svg>
+              <figcaption><b>Wave 4’s buy zone</b>After waves 1 to 3, the pullback usually ends between the 0.382 and 0.5 retracement of wave 3, above the top of wave 1. The buy is the first daily close up inside it.<i>Wave 4 never overlaps wave 1.</i></figcaption></figure>
+            <figure><svg viewBox="0 0 240 130" role="img" aria-label="Wave 3 usually reaches 1.618 times wave 1, measured from the end of wave 2">
+              <polyline class="p" points="10,112 70,72 96,96"/><polyline class="f" points="96,96 196,30"/>
+              <line class="g" x1="96" y1="56" x2="236" y2="56"/><line class="g" x1="96" y1="45" x2="236" y2="45"/><line class="u" x1="96" y1="30" x2="236" y2="30"/>
+              <text x="200" y="66">1.0</text><text x="200" y="41">1.272</text><text class="ut" x="132" y="24">1.618: wave 3’s reach</text><text x="64" y="66">1</text><text x="90" y="110">2</text></svg>
+              <figcaption><b>Where wave 3 runs</b>Measured from the end of wave 2, wave 3 usually reaches 1.618 times the length of wave 1; 1.272 is where it often stalls first.<i>Measure from the end of wave 2.</i></figcaption></figure>
+          </div>
+        </details>
+        <details class="gls"><summary><h3>The words the page uses</h3></summary>
+          <dl class="gdl">
+            <div><dt>Buy zone</dt><dd>The price range where the plan buys. Its top is the cap: the plan never chases above it.</dd></div>
+            <div><dt>Out</dt><dd>The daily close that proves the plan wrong. It sits under the level the plan rests on, outside a normal day’s noise.</dd></div>
+            <div><dt>Target</dt><dd>Where the plan takes profit: just under the next level where sellers stepped in before or, with none overhead, where the last advance projects.</dd></div>
+            <div><dt>Fibonacci extension</dt><dd>Where a move tends to run, measured from the last swing: the advance repeated from its pullback low, or 1.272, 1.618 (a wave 3’s usual reach) or 2 to 2.618 times it. A pullback’s own 1.272 and 1.618 extensions are where a break of its high first runs.</dd></div>
+            <div><dt>Trim</dt><dd>Selling part of a position and holding the rest. A wave plan sells a fifth at its first target, the old high, and holds the rest for wave 3’s reach: the first ceiling is a trim, never the whole.</dd></div>
+            <div><dt>Reward to risk</dt><dd>What the plan can make for each unit it risks. At 2 to 1, it breaks even if it works one time in three.</dd></div>
+            <div><dt>Horizon</dt><dd>If the plan works, the time a move that size typically takes for this stock.</dd></div>
+            <div><dt>Support and resistance</dt><dd>Prices where buyers (support) or sellers (resistance) stepped in before. Different kinds at one price make a stronger level.</dd></div>
+            <div><dt>Pullback and breakout</dt><dd>A pullback buys a dip back to support; a breakout buys a daily close above resistance.</dd></div>
+            <div><dt>ATR</dt><dd>Average true range: a stock’s typical daily move. Plans set their lines in ATR, so a calm stock and a wild one are judged alike.</dd></div>
+            <div><dt>Divergence</dt><dd>Price and momentum disagreeing at two swings. Hidden bullish divergence (a higher low in price, a lower low in momentum) often means an uptrend resumes.</dd></div>
+            <div><dt>Elliott wave</dt><dd>Trends tend to move in five waves before a larger correction. The desk uses the count to say where a stock sits in its trend and which price proves the count wrong.</dd></div>
+            <div><dt>Wave 4</dt><dd>After waves 1 to 3 up, the pullback that usually ends between the 0.382 and 0.5 retracement of wave 3, above the top of wave 1. A daily close up inside the zone is the buy; a close under the wave-1 high ends the count.</dd></div>
+            <div><dt>Wave 2 and the reaction</dt><dd>After five clean waves up, the pullback usually ends between the 0.618 and 0.786 retracement of the advance, in three waves, on lighter volume. The zone is where to watch; a daily close up inside it is the buy. Under the start of wave 1 the count is wrong.</dd></div>
+            <div><dt>Fear day</dt><dd>A session the stock and the fund it follows (QQQ for tech, SPY for the rest) both close red. The desk’s fear-day rule buys long setups on such a day.</dd></div>
+            <div><dt>Conviction</dt><dd>High, Solid or Speculative: how many kinds of evidence agree behind the plan, net, each kind counted once.</dd></div>
+            <div><dt>The desk’s take</dt><dd>Strong, For, Leaning or Against: the desk’s judgment, recorded before the outcome so it can be scored.</dd></div>
+          </dl>
+        </details>
+      </div>
+    </section>
+  </div>
+</main>
+<footer class="foot wrap">
+  <p>Master Desk · <button class="lk" id="aboutb" type="button" aria-haspopup="dialog">About</button></p>
+</footer>
+<dialog id="about" aria-labelledby="about-t">
+  <div class="dlg">
+    <div class="dh"><h2 id="about-t">About Master Desk</h2><button class="xb" id="aboutx" type="button" aria-label="Close">×</button></div>
+    <h3>What this is</h3>
+    <p>Master Desk is a paper trading desk. This page publishes its best setups: one plan per stock, read from everything the desk measures, with the evidence behind it in plain English.</p>
+    <p>A new edition is published every <span id="cad">30</span> minutes, on a fixed schedule. Each stock’s read is made after the close, on completed daily prices.</p>
+    <h3>The record</h3>
+    <p>Every listed setup is written down before the outcome, with its plan and its evidence, and scored on daily closes: out on a close below the out line, target when it trades, the time stop at twice the horizon, at most 40 sessions (a wave plan's measured to its second target). A wave plan takes a fifth off at its first target and holds the rest for its second. Nothing is edited or deleted.</p>
+  </div>
+</dialog>
+<div class="sr" id="live" role="status"></div>
+<template id="tcard"><article class="card setup" data-anchor><div class="top"><h3 class="tk"><button class="tog" type="button" aria-expanded="false"></button></h3><span class="act"></span><span class="cvn"></span><span class="end"><span class="chev" aria-hidden="true"></span></span></div><div class="bd"></div><div class="det" hidden><div class="db"></div><div class="dg ch"></div></div></article></template>
+</body>
+</html>

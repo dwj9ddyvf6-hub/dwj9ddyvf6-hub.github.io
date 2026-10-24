@@ -1,0 +1,13 @@
+{
+  "name": "Master Desk",
+  "short_name": "Master Desk",
+  "description": "The day’s best setups from a paper research desk. Not investment advice; hypothetical results.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0E1116",
+  "theme_color": "#0E1116",
+  "icons": [
+    {"src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any"}
+  ]
+}
